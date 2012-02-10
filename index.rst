@@ -20,6 +20,7 @@ Voici les différentes sections que nous allons aborder:
 .. toctree::
    :maxdepth: 2
 
+   getting_started.rst
 
 0. Rappels
    (pointeurs vers les docs respectives)
