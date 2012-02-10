@@ -113,4 +113,6 @@ X. Add a formalchemy/geoformalchemy backend interface
 
 X. papyrus_maproxy, papyrus_ogcproxy
 
-
+TODO:
+modifier tout le workshop pour pointer vers le dépot github de camptocamp au
+lieu de bbinet: s/bbinet/camptocamp/
