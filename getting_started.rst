@@ -74,14 +74,57 @@ commande::
       zodb:          Pyramid ZODB project using traversal
 
 
-Mise en place d'une base postgres/postgis
------------------------------------------
+Mise en place de la base de données
+-----------------------------------
+
+Pour installer un base de données PostgreSQL et son extension spatiale PostGIS
+sous Debian Squeeze, vous pouvez lancer la commande suivante::
+
+    $ sudo aptitude install libgeos-3.2.0 postgresql-8.4 postgis postgresql-8.4-postgis
 
 Pour la mise en place de la base de données, nous avons préparé un jeu de
 données de test, ainsi qu'un script de création de la base de données.
-Vous pouvez d'abord récupérer le données ICI? puis exécuter le script::
 
-    (venv) $ ./create_database.bash -p
+Avant de créer la base de données, nous allons créer l'utilisateur www-data
+avec des droits limités::
 
-TODO: comment récupérer les données et le script???
+    $ sudo su postgres
+    $ createuser -P www-data
+    Saisir le mot de passe pour le nouveau rôle : www-data
+    Le saisir de nouveau : www-data
+    Le nouveau rôle est-il super-utilisateur ? (o/n) n
+    Le nouveau rôle est-il autorisé à créer des bases de données ? (o/n) n
+    Le nouveau rôle est-il autorisé à créer de nouveaux rôles ? (o/n) n
 
+Vous pouvez maintenant récupérer les données depuis la branche
+``workshop-stage1`` du repository MapFishSample:
+http://github.com/bbinet/PapyrusSample/tarball/workshop-stage1.
+Décompressez l'archive, allez dans le répertoire ``geodata``, puis exécuter le
+script (vous pouvez éventuellement adapter les variables au début du script
+``create_database.bash`` afin qu'elles correspondent à votre environnement)::
+
+    $ curl -L https://github.com/bbinet/PapyrusSample/tarball/workshop-stage1 | tar zxvf -
+    $ cd <untarred directory>/geodata/
+    $ sudo su postgres
+    $ ./create_database.bash -p
+
+Nous pouvons maintenant vérifier que la base de données a bien été créée et que
+des données ont été insérées::
+
+    $ psql -h localhost -U www-data -d papyrus_sample
+
+    papyrus_sample=> select count(*) from poi_osm;
+    count 
+    -------
+        42
+    (1 ligne)
+
+
+Résumé
+------
+
+Vous avez donc installé le framework Pyramid dans un virtualenv, et vous avez
+mis en place une base de données fonctionnelle contenant des données de test.
+
+Tout est maintenant en place pour passer à la création de votre première
+application Pyramid.
