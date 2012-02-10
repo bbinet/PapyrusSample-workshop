@@ -21,6 +21,7 @@ Voici les différentes sections que nous allons aborder:
    :maxdepth: 2
 
    getting_started.rst
+   create_pyramid_application.rst
 
 0. Rappels
    (pointeurs vers les docs respectives)
